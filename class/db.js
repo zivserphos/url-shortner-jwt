@@ -31,9 +31,9 @@ class DataBase{
         
     }
 
-    static async createUrlObj(_originUrl) {
+    static async #createUrlObj(_originUrl) {
         let newShortCut = await this.#createShortCut();
-        while(await this.checkIfUrlExist(newShortCut)){
+        while(await this.#checkIfUrlExist(newShortCut)){
             newShortCut = await this.#createShortCut();
         }
         const urlObj = {
@@ -44,7 +44,12 @@ class DataBase{
         return urlObj;
     }
 
-    static async writeUrl(newObj) {
+    static async addObjToDb(originUrl) {
+        await this.#writeUrl(await this.#createUrlObj(originUrl))
+        console.log("written succesfully")
+    }
+
+    static async #writeUrl(newObj) {
         const dataBase = JSON.parse(await this.#readDataBase());
         const objectsArr=  dataBase.objects;
         objectsArr.push(newObj);
@@ -53,7 +58,7 @@ class DataBase{
     }
     
 
-    static async checkIfUrlExist(randomSequence){
+    static async #checkIfUrlExist(randomSequence){
         const dataBase = await this.#readDataBase();
     for (let obj in dataBase.objects) {
         if (obj.shortUrl === randomSequence) {
@@ -64,5 +69,4 @@ class DataBase{
     }
 }
 
-DataBase.writeUrl("SSSSSSSSSSSSSSS")
-.then((data) => data)
+DataBase.addObjToDb("https://github.com/zivserphos/cyber4s-final1-boilerplate-url-shortener/tree/development")
