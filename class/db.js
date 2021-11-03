@@ -95,6 +95,8 @@ class DataBase {
     dataBase = JSON.parse(dataBase);
     for (let i = 0; i < dataBase.objects.length; i++) {
       if (dataBase.objects[i].shortUrl === _shortUrl) {
+        dataBase.objects[i].views++;
+        await fsAsync.writeFile("./db.json", JSON.stringify(dataBase));
         return dataBase.objects[i].originUrl;
       }
     }
