@@ -4,7 +4,6 @@ const fs = require("fs");
 const path = require("path");
 const dataBase = require("../class/db");
 const { isURL } = require("validator");
-const { nextTick } = require("process");
 
 shortUrlRouter.post("/", async (req, res, next) => {
   if (isURL(req.body.originUrl)) {
@@ -13,5 +12,7 @@ shortUrlRouter.post("/", async (req, res, next) => {
     next({ status: 400, message: { error: "INVALID URL" } });
   }
 });
+
+shortUrlRouter.get("/");
 
 module.exports = shortUrlRouter;

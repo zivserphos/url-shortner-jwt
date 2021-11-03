@@ -27,7 +27,7 @@
   - [x] check if already was shortened
   - [x] return the shorterned url
   - [x] check if uid is realy unique
-- [x] GET /<UID>
+- [] GET /<UID>
   - [x] store user req data
   - [x] redirect to the URL
 - [x] GET /app
