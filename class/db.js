@@ -3,6 +3,7 @@ const fsAsync = require("fs/promises");
 const path = require("path");
 const util = require("util");
 const readFile = (filename) => util.promisify(fs.readFile)(filename, "utf-8");
+const moment = require("moment");
 
 class DataBase {
   static #createShortCut() {
@@ -21,6 +22,7 @@ class DataBase {
 
   static async #readDataBase() {
     try {
+      console.log("im here");
       const fileData = await readFile("./db.json");
       return fileData;
     } catch (error) {
@@ -37,6 +39,7 @@ class DataBase {
       originUrl: _originUrl,
       shortUrl: newShortCut,
       views: 0,
+      creatorDate: moment().format("dddd,MMMM Do YYYY, h:mm:ss a"),
     };
     return urlObj;
   }
@@ -54,7 +57,6 @@ class DataBase {
     objectsArr.push(newObj);
     dataBase.objects = objectsArr;
     await fsAsync.writeFile("./db.json", JSON.stringify(dataBase));
-    console.log(newObj);
     return newObj.shortUrl;
   }
 
@@ -87,6 +89,16 @@ class DataBase {
       }
     }
   }
-}
 
+  static async getOriginUrl(_shortUrl) {
+    let dataBase = await this.#readDataBase();
+    dataBase = JSON.parse(dataBase);
+    for (let i = 0; i < dataBase.objects.length; i++) {
+      if (dataBase.objects[i].shortUrl === _shortUrl) {
+        return dataBase.objects[i].originUrl;
+      }
+    }
+    return false;
+  }
+}
 module.exports = DataBase;

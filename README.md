@@ -32,6 +32,6 @@
   - [x] redirect to the URL
 - [x] GET /app
   - [x] serve the static from ./public folder
-- [x] GET /api/stats/<UID>
-  - [x] respond with JSON of the stats
-- [x] **refactoring**
+- [] GET /api/stats/<UID>
+  - [] respond with JSON of the stats
+- [] **refactoring**
