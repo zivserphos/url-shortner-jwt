@@ -42,6 +42,9 @@ class DataBase {
   }
 
   static async addObjToDb(originUrl) {
+    if (await this.#isShortenExist(originUrl)) {
+      return await this.#getShortUrl(originUrl);
+    }
     return await this.#writeUrl(await this.#createUrlObj(originUrl));
   }
 
@@ -56,13 +59,33 @@ class DataBase {
   }
 
   static async #checkIfUrlExist(randomSequence) {
-    const dataBase = await this.#readDataBase();
-    for (let obj in dataBase.objects) {
-      if (obj.shortUrl === randomSequence) {
+    let dataBase = await this.#readDataBase();
+    dataBase = JSON.parse(dataBase);
+    for (let i = 0; i < dataBase.objects.length; i++) {
+      if (dataBase.objects[i].shortUrl === randomSequence) {
         return true;
       }
     }
     return false;
+  }
+  static async #isShortenExist(_originUrl) {
+    let dataBase = await this.#readDataBase();
+    dataBase = JSON.parse(dataBase);
+    for (let i = 0; i < dataBase.objects.length; i++) {
+      if (dataBase.objects[i].originUrl === _originUrl) {
+        return true;
+      }
+    }
+    return false;
+  }
+  static async #getShortUrl(_originUrl) {
+    let dataBase = await this.#readDataBase();
+    dataBase = JSON.parse(dataBase);
+    for (let i = 0; i < dataBase.objects.length; i++) {
+      if (dataBase.objects[i].originUrl === _originUrl) {
+        return dataBase.objects[i].shortUrl;
+      }
+    }
   }
 }
 
