@@ -23,7 +23,7 @@ class DataBase {
   static async #readDataBase() {
     try {
       console.log("im here");
-      const fileData = await readFile("./db.json");
+      const fileData = await readFile("./server/db.json");
       return fileData;
     } catch (error) {
       console.error(error);
@@ -56,7 +56,7 @@ class DataBase {
     const objectsArr = dataBase.objects;
     objectsArr.push(newObj);
     dataBase.objects = objectsArr;
-    await fsAsync.writeFile("./db.json", JSON.stringify(dataBase));
+    await fsAsync.writeFile("./server/db.json", JSON.stringify(dataBase));
     return newObj.shortUrl;
   }
 
@@ -96,7 +96,7 @@ class DataBase {
     for (let i = 0; i < dataBase.objects.length; i++) {
       if (dataBase.objects[i].shortUrl === _shortUrl) {
         dataBase.objects[i].views++;
-        await fsAsync.writeFile("./db.json", JSON.stringify(dataBase));
+        await fsAsync.writeFile("./server/db.json", JSON.stringify(dataBase));
         return dataBase.objects[i].originUrl;
       }
     }

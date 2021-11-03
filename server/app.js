@@ -19,9 +19,9 @@ app.use("/api/shorturl/", shortUrlRouter);
 app.use("api/statistic/:shorturl-id", statsRoute);
 app.use(errorHandler);
 
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/views/index.html");
-});
+// app.get("/", (req, res) => {
+//   res.sendFile(__dirname + "../src/index.html");
+// });
 
 app.get("/", (req, res) => {
   res.json("zibi bibi");

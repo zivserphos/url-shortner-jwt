@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node ./server/index.js",
+    "serve": "webpack serve",
+    "dev": "nodemon ./server/index.js"
   },
   "dependencies": {
+    "@material-ui/core": "^4.12.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
