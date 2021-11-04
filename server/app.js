@@ -16,15 +16,11 @@ app.use(express.json());
 app.use("/", reDirectRouter);
 app.use("/public", express.static(`./public`));
 app.use("/api/shorturl/", shortUrlRouter);
-app.use("api/statistic/:shorturl-id", statsRoute);
+app.use("/api/statistic", statsRoute);
 app.use(errorHandler);
 
 // app.get("/", (req, res) => {
 //   res.sendFile(__dirname + "../src/index.html");
 // });
-
-app.get("/", (req, res) => {
-  res.json("zibi bibi");
-});
 
 module.exports = app;

@@ -116,7 +116,6 @@ class DataBase {
   }
 
   static async getObjectByShortUrl(_shortUrl) {
-    console.log(_shortUrl);
     let dataBase = await this.#readDataBase();
     dataBase = JSON.parse(dataBase);
     for (let i = 0; i < dataBase.objects.length; i++) {

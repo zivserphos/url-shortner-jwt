@@ -7,6 +7,7 @@ const db = require("../class/db");
 
 reDirectRouter.get("/:shortUrl", async (req, res, next) => {
   try {
+    console.log(req.params);
     const originUrl = await db.getOriginUrl(req.params.shortUrl);
     if (!originUrl) {
       throw { status: 404, message: { error: "Invalid Url" } };

@@ -20,16 +20,37 @@ function createElement(tagName, children = [], classes = [], attributes = {}) {
   return el;
 }
 
-// async function getStats(event) {
-//   try {
-//     const sequence = event.target.dataset.shortUrl;
-//     const stats = await axios.get(
-//       `${baseServerPath}/api/statistic/${sequence}`
-//     );
-//   } catch (err) {}
-// }
+async function getStats(event) {
+  try {
+    const sequence = event.target.dataset.shorturl;
+    const stats = await axios.get(
+      `${baseServerPath}/api/statistic/${sequence}`
+    );
+    return stats;
+  } catch (err) {}
+}
 
-//function handlerStat
+async function handlerStat(event) {
+  const stats = await getStats(event);
+  const modal = document.getElementById("modal");
+  modal.style.display = "flex";
+  document.getElementById("wrapper").style.display = "none";
+  for (let stat in stats.data) {
+    const statData = createElement(
+      "LI",
+      [`${stat}: ${stats.data[stat]}`],
+      ["statLi"]
+    );
+    modal.children[1].append(statData);
+  }
+}
+
+function closeStatsInfo() {
+  const modal = document.getElementById("modal");
+  document.querySelector(".details-modal-content").textContent = "";
+  modal.style.display = "none";
+  document.getElementById("wrapper").style.display = "flex";
+}
 
 async function getShortenUrl(originUrl) {
   try {
@@ -39,6 +60,7 @@ async function getShortenUrl(originUrl) {
         "content-type": "application/json",
       },
     });
+    console.log(`${baseServerPath}/api/shorturl`);
     return response;
   } catch (err) {
     clearResultDiv();
@@ -66,11 +88,16 @@ const createResultDiv = (element, newSequence) => {
       { "data-shorturl": newSequence }
     )
   );
+  console.log(
+    element.children[1].addEventListener("click", (event) => handlerStat(event))
+  );
 };
 
 function clearResultDiv() {
   const result = document.getElementById("resultUrl");
+  console.log(result);
   result.textContent = "";
+  console.log(result);
 }
 
 async function serveUrl() {
@@ -84,3 +111,7 @@ async function serveUrl() {
 document
   .getElementById("submitBtn")
   .addEventListener("click", () => serveUrl());
+
+document
+  .getElementById("closeStatInfo")
+  .addEventListener("click", () => closeStatsInfo());
