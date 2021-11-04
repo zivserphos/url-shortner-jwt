@@ -88,9 +88,7 @@ const createResultDiv = (element, newSequence) => {
       { "data-shorturl": newSequence }
     )
   );
-  console.log(
-    element.children[1].addEventListener("click", (event) => handlerStat(event))
-  );
+  element.children[1].addEventListener("click", (event) => handlerStat(event));
 };
 
 function clearResultDiv() {
