@@ -65,6 +65,7 @@ async function getShortenUrl(originUrl) {
   } catch (err) {
     clearResultDiv();
     const errorsDiv = document.querySelector(".errors");
+    console.log(err);
     errorsDiv.textContent = "Invalid Url";
     setTimeout(() => {
       errorsDiv.firstChild.remove();
@@ -83,7 +84,7 @@ const createResultDiv = (element, newSequence) => {
   element.appendChild(
     createElement(
       "button",
-      [createElement("span", "stats")],
+      [createElement("span", "stats", [], { "data-shorturl": newSequence })],
       ["statsBtn", "btn"],
       { "data-shorturl": newSequence }
     )
