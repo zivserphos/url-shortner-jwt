@@ -29,6 +29,8 @@
     "@webpack-cli/generators": "^2.4.1",
     "babel-loader": "^8.2.3",
     "css-loader": "^6.5.0",
+    "favicons": "^6.2.2",
+    "favicons-webpack-plugin": "^5.0.2",
     "html-webpack-plugin": "^5.5.0",
     "nodemon": "^2.0.4",
     "prettier": "^2.4.1",

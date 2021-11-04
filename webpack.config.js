@@ -2,6 +2,7 @@
 
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV == "production";
 
@@ -17,6 +18,7 @@ const config = {
     host: "localhost",
   },
   plugins: [
+    new FaviconsWebpackPlugin("./src/download.png"),
     new HtmlWebpackPlugin({
       template: "src/index.html",
     }),
