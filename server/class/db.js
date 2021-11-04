@@ -22,11 +22,11 @@ class DataBase {
 
   static async #readDataBase() {
     try {
-      console.log("im here");
       const fileData = await readFile("./server/db.json");
       return fileData;
     } catch (error) {
-      console.error(error);
+      console.error("cannot read DataBase");
+      throw Error("cannot read DataBase");
     }
   }
 
@@ -61,24 +61,32 @@ class DataBase {
   }
 
   static async #checkIfUrlExist(randomSequence) {
-    let dataBase = await this.#readDataBase();
-    dataBase = JSON.parse(dataBase);
-    for (let i = 0; i < dataBase.objects.length; i++) {
-      if (dataBase.objects[i].shortUrl === randomSequence) {
-        return true;
+    try {
+      let dataBase = await this.#readDataBase();
+      dataBase = JSON.parse(dataBase);
+      for (let i = 0; i < dataBase.objects.length; i++) {
+        if (dataBase.objects[i].shortUrl === randomSequence) {
+          return true;
+        }
       }
+      return false;
+    } catch (err) {
+      throw "cannot read DataBase";
     }
-    return false;
   }
   static async #isShortenExist(_originUrl) {
-    let dataBase = await this.#readDataBase();
-    dataBase = JSON.parse(dataBase);
-    for (let i = 0; i < dataBase.objects.length; i++) {
-      if (dataBase.objects[i].originUrl === _originUrl) {
-        return true;
+    try {
+      let dataBase = await this.#readDataBase();
+      dataBase = JSON.parse(dataBase);
+      for (let i = 0; i < dataBase.objects.length; i++) {
+        if (dataBase.objects[i].originUrl === _originUrl) {
+          return true;
+        }
       }
+      return false;
+    } catch (err) {
+      throw "cannot read DataBase";
     }
-    return false;
   }
   static async #getShortUrl(_originUrl) {
     let dataBase = await this.#readDataBase();
@@ -91,16 +99,31 @@ class DataBase {
   }
 
   static async getOriginUrl(_shortUrl) {
+    try {
+      let dataBase = await this.#readDataBase();
+      dataBase = JSON.parse(dataBase);
+      for (let i = 0; i < dataBase.objects.length; i++) {
+        if (dataBase.objects[i].shortUrl === _shortUrl) {
+          dataBase.objects[i].views++;
+          await fsAsync.writeFile("./server/db.json", JSON.stringify(dataBase));
+          return dataBase.objects[i].originUrl;
+        }
+      }
+      return false;
+    } catch (err) {
+      throw Error(err);
+    }
+  }
+
+  static async getObjectByShortUrl(_shortUrl) {
+    console.log(_shortUrl);
     let dataBase = await this.#readDataBase();
     dataBase = JSON.parse(dataBase);
     for (let i = 0; i < dataBase.objects.length; i++) {
       if (dataBase.objects[i].shortUrl === _shortUrl) {
-        dataBase.objects[i].views++;
-        await fsAsync.writeFile("./server/db.json", JSON.stringify(dataBase));
-        return dataBase.objects[i].originUrl;
+        return dataBase.objects[i];
       }
     }
-    return false;
   }
 }
 module.exports = DataBase;

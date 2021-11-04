@@ -1,75 +1,224 @@
-$color: #1abc9c;
-
-h1,
-input::-webkit-input-placeholder,
-button {
-  font-family: "roboto", sans-serif;
-  transition: all 0.3s ease-in-out;
+@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@500&family=Teko:wght@300&family=Ubuntu:ital,wght@0,500;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,500;1,400&display=swap");
+#wrapper {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
 }
-
-h1 {
-  height: 100px;
-  width: 100%;
-  font-size: 18px;
-  background: darken($color, 4%);
-  color: white;
-  line-height: 150%;
-  border-radius: 3px 3px 0 0;
-  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
+h3 {
+  font-family: "Ubuntu", sans-serif;
 }
-
-form {
+h4 {
+  font-family: "Ubuntu", sans-serif;
+}
+$brown: #2b2520;
+$green: #39dbc2;
+$pink: #f41fbf;
+$yellow: #ffed28;
+$purple: #b028ff;
+$blue: #49a7ff;
+$red: #ff3838;
+$orange: #db7953;
+// Font
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+// Size
+$extra-large: 110px;
+$large: 50px;
+*,
+*:before,
+*:after {
   box-sizing: border-box;
-  width: 260px;
-  margin: 100px auto 0;
-  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.2);
-  padding-bottom: 40px;
-  border-radius: 3px;
-  h1 {
-    box-sizing: border-box;
-    padding: 20px;
-  }
 }
-
-input {
-  margin: 40px 25px;
-  width: 200px;
-  display: block;
-  border: none;
-  padding: 10px 0;
-  border-bottom: solid 1px $color;
-  transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, $color 4%);
-  background-position: -200px 0;
-  background-size: 200px 100%;
-  background-repeat: no-repeat;
-  color: darken($color, 20%);
-  &:focus,
-  &:valid {
-    box-shadow: none;
-    outline: none;
-    background-position: 0 0;
-    &::-webkit-input-placeholder {
-      color: $color;
-      font-size: 11px;
-      transform: translateY(-20px);
-      visibility: visible !important;
+@mixin center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body {
+  @include center;
+}
+.container {
+  * {
+    margin: 20px 0;
+  }
+  .neon-text {
+    $random-text: "Sexy Url shortner";
+    position: relative;
+    $stroke-width: $large * 0.01;
+    font-family: "Pacifico", cursive;
+    text-transform: uppercase;
+    font-size: $large;
+    color: lighten($pink, 25%);
+    -webkit-text-stroke-width: $stroke-width;
+    -webkit-text-stroke-color: lighten($pink, 5%);
+    @include center;
+    text-shadow: 0 0 40px lighten($pink, 5%), 0 0 40px lighten($pink, 5%),
+      0 0 40px lighten($pink, 5%);
+    &:after {
+      content: $random-text;
+      z-index: -1;
+      position: absolute;
+      color: transparent;
+      -webkit-text-stroke-width: $stroke-width;
+      -webkit-text-stroke-color: darken($pink, 80%);
+      top: 1%;
+      // left: 0.5px;
     }
   }
 }
-
-button {
+// button section
+@import url("https://fonts.googleapis.com/css?family=Amatic+SC");
+.button_container {
+  margin-top: 7vh;
+  position: flex;
+  left: 0;
+  right: 0;
+  top: 50vh;
+}
+.btn {
   border: none;
-  background: $color;
+  display: block;
+  text-align: center;
   cursor: pointer;
-  border-radius: 3px;
-  padding: 6px;
-  width: 200px;
-  color: white;
-  margin-left: 25px;
-  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  background-color: #222;
+  padding: 17px 60px;
+  margin: 0 auto;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+.btn span {
+  position: relative;
+  z-index: 1;
+}
+.btn:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 490%;
+  width: 140%;
+  background: $pink;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
+  transform: translateX(-98%) translateY(-25%) rotate(45deg);
+}
+.btn:hover:after {
+  -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+  transform: translateX(-9%) translateY(-25%) rotate(45deg);
+}
+//background section
+// background
+/* Cool infinite background scrolling animation.
+ * Twitter: @kootoopas
+ */
+/* Exo thin font from Google. */
+@import url(https://fonts.googleapis.com/css?family=Exo:100);
+/* Background data (Original source: https://subtlepatterns.com/grid-me/) */
+$bg-url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/UpuzVzWEi1atGjRokWLFi1atGjRokWLFi1atGjRokWLFi1af7Ukz8xWp8z8AAAA//8DAJ4LoEAAlL1nAAAAAElFTkSuQmCC";
+$bg-width: 50px;
+$bg-height: 50px;
+/* Animations */
+@-webkit-keyframes bg-scrolling-reverse {
+  100% {
+    background-position: $bg-width $bg-height;
   }
+}
+@-moz-keyframes bg-scrolling-reverse {
+  100% {
+    background-position: $bg-width $bg-height;
+  }
+}
+@-o-keyframes bg-scrolling-reverse {
+  100% {
+    background-position: $bg-width $bg-height;
+  }
+}
+@keyframes bg-scrolling-reverse {
+  100% {
+    background-position: $bg-width $bg-height;
+  }
+}
+@-webkit-keyframes bg-scrolling {
+  0% {
+    background-position: $bg-width $bg-height;
+  }
+}
+@-moz-keyframes bg-scrolling {
+  0% {
+    background-position: $bg-width $bg-height;
+  }
+}
+@-o-keyframes bg-scrolling {
+  0% {
+    background-position: $bg-width $bg-height;
+  }
+}
+@keyframes bg-scrolling {
+  0% {
+    background-position: $bg-width $bg-height;
+  }
+}
+/* Main styles */
+body {
+  margin-top: 3.5vh;
+  color: #999;
+  text-align: center;
+  /* img size is 50x50 */
+  background: url($bg-url) repeat 0 0;
+  -webkit-animation: bg-scrolling-reverse 0.92s infinite; /* Safari 4+ */
+  -moz-animation: bg-scrolling-reverse 0.92s infinite; /* Fx 5+ */
+  -o-animation: bg-scrolling-reverse 0.92s infinite; /* Opera 12+ */
+  animation: bg-scrolling-reverse 0.92s infinite; /* IE 10+ */
+  -webkit-animation-timing-function: linear;
+  -moz-animation-timing-function: linear;
+  -o-animation-timing-function: linear;
+  animation-timing-function: linear;
+  &::before {
+    font-size: 8rem;
+    font-weight: 100;
+    font-style: normal;
+  }
+}
+
+#urlInput {
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  text-align: center;
+  border: 0.5px grey solid;
+  transform: scale(1.5);
+  width: 50%;
+  margin: auto;
+  font-family: "Dosis", sans-serif;
+}
+
+#resultUrl {
+  margin-top: 10vh;
+  font-family: "Dosis", sans-serif;
+}
+
+.errors {
+  font-weight: bold;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 5.5vh;
+  color: $red;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }

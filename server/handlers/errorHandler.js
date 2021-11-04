@@ -4,6 +4,7 @@ function errorHandler(err, req, res, next) {
     return res.send(err);
   }
   res.status(err.status);
+  console.log(err.message);
   res.send(err.message);
 }
 

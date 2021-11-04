@@ -9,7 +9,7 @@ reDirectRouter.get("/:shortUrl", async (req, res, next) => {
   try {
     const originUrl = await db.getOriginUrl(req.params.shortUrl);
     if (!originUrl) {
-      throw { status: 404, message: { error: "Not Found" } };
+      throw { status: 404, message: { error: "Invalid Url" } };
     }
     res.redirect(originUrl);
   } catch (err) {

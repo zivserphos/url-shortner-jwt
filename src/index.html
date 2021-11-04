@@ -1,21 +1,38 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Webpack App</title>
-    </head> 
-    <body>
-        <form>
-            <h1>Enter a long URL to make a TinyURL</h1>
-            <input placeholder="Username" type="text" required="">
-            <input placeholder="Password" type="password" required="">
-            <button>Submit</button>
-          </form> 
-
-          
-          <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-          
-          <link href='https://fonts.googleapis.com/css?family=Roboto:400' rel='stylesheet' type='text/css'>
-    </body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap core CSS -->
+    <title>url shortner</title>
+  </head>
+  <body>
+    <!-- Trigger/Open The Modal -->
     
+
+
+
+
+
+
+    <div id="wrapper">
+      <div class="container">
+        <div class="neon-text">Sexy Url shortner</div>
+      </div>
+      <h4 id="sexyH4">Do you need a short & sexy url for you site ?</h4>
+      <h3 id="enterYourUrl">
+        Enter you site url and click on the shorten button to get you Sexyurl
+        A$ap !
+      </h3>
+      <input type="text" id="urlInput" placeholder="Enter your Url" />
+      <span class="button_container">
+        <button class="btn" id = "submitBtn"><span>shorten</span></button>
+        <div class="errors"></div>
+      </span>
+      <div id = "resultUrl">
+      </div>
+      
+    </div>
+  </body>
 </html>
