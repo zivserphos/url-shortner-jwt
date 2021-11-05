@@ -1,6 +1,7 @@
 import axios from "axios";
 import "./styles.scss";
 import "./download.png";
+const Base_Server_Path = ziv - url - shortener.herokuapp.com;
 
 function createElement(tagName, children = [], classes = [], attributes = {}) {
   // create new element in more comfortable
@@ -74,7 +75,7 @@ async function getShortenUrl(originUrl) {
 const createResultDiv = (element, newSequence) => {
   element.appendChild(
     createElement("a", `/${newSequence}`, ["shortLink"], {
-      href: `/${newSequence}`,
+      href: `${Base_Server_Path}/${newSequence}`,
     })
   );
   element.appendChild(

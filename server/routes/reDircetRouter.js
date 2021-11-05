@@ -4,6 +4,7 @@ const reDirectRouter = express.Router();
 const fs = require("fs");
 const path = require("path");
 const db = require("../class/db");
+//const dnsLookUp = require("dns")
 
 reDirectRouter.get("/", (req, res) => {
   res.redirect("/app");
