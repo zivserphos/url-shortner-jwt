@@ -25,8 +25,7 @@ class DataBase {
       const fileData = await readFile("./server/db.json");
       return fileData;
     } catch (error) {
-      console.error("cannot read DataBase");
-      throw Error("cannot read DataBase");
+      throw "cannot read DataBase";
     }
   }
 
@@ -45,19 +44,27 @@ class DataBase {
   }
 
   static async addObjToDb(originUrl) {
-    if (await this.#isShortenExist(originUrl)) {
-      return await this.#getShortUrl(originUrl);
+    try {
+      if (await this.#isShortenExist(originUrl)) {
+        return await this.#getShortUrl(originUrl);
+      }
+      return await this.#writeUrl(await this.#createUrlObj(originUrl));
+    } catch (err) {
+      throw err;
     }
-    return await this.#writeUrl(await this.#createUrlObj(originUrl));
   }
 
   static async #writeUrl(newObj) {
-    const dataBase = JSON.parse(await this.#readDataBase());
-    const objectsArr = dataBase.objects;
-    objectsArr.push(newObj);
-    dataBase.objects = objectsArr;
-    await fsAsync.writeFile("./server/db.json", JSON.stringify(dataBase));
-    return newObj.shortUrl;
+    try {
+      const dataBase = JSON.parse(await this.#readDataBase());
+      const objectsArr = dataBase.objects;
+      objectsArr.push(newObj);
+      dataBase.objects = objectsArr;
+      await fsAsync.writeFile("./server/db.json", JSON.stringify(dataBase));
+      return newObj.shortUrl;
+    } catch (err) {
+      throw "current unable to save urlS";
+    }
   }
 
   static async #checkIfUrlExist(randomSequence) {
@@ -111,7 +118,7 @@ class DataBase {
       }
       return false;
     } catch (err) {
-      throw Error(err);
+      throw err;
     }
   }
 

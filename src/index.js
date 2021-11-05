@@ -60,22 +60,20 @@ async function getShortenUrl(originUrl) {
         "content-type": "application/json",
       },
     });
-    console.log(`${baseServerPath}/api/shorturl`);
     return response;
   } catch (err) {
+    const errorMessage = err.response.data.error;
+    console.log(errorMessage);
     clearResultDiv();
     const errorsDiv = document.querySelector(".errors");
-    console.log(err);
-    errorsDiv.textContent = "Invalid Url";
+    errorsDiv.textContent = errorMessage;
     setTimeout(() => {
       errorsDiv.firstChild.remove();
     }, 3000);
   }
-  throw "invalid Url";
 }
 
 const createResultDiv = (element, newSequence) => {
-  console.log(newSequence);
   element.appendChild(
     createElement("a", `${baseServerPath}/${newSequence}`, ["shortLink"], {
       href: `${baseServerPath}/${newSequence}`,
@@ -94,17 +92,19 @@ const createResultDiv = (element, newSequence) => {
 
 function clearResultDiv() {
   const result = document.getElementById("resultUrl");
-  console.log(result);
   result.textContent = "";
-  console.log(result);
 }
 
 async function serveUrl() {
   const inputValue = document.getElementById("urlInput").value;
-  const newSequence = await getShortenUrl(inputValue);
-  const result = document.getElementById("resultUrl");
-  clearResultDiv();
-  createResultDiv(result, newSequence.data);
+  try {
+    const newSequence = await getShortenUrl(inputValue);
+    const result = document.getElementById("resultUrl");
+    clearResultDiv();
+    createResultDiv(result, newSequence.data);
+  } catch (err) {
+    return;
+  }
 }
 
 document

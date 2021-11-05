@@ -12,7 +12,7 @@ reDirectRouter.get("/:shortUrl", async (req, res, next) => {
     if (!originUrl) {
       throw { status: 404, message: { error: "Invalid Url" } };
     }
-    if (originUrl.slice(0, 5) !== "http") {
+    if (originUrl.slice(0, 4) !== "http") {
       return res.redirect(`http://${originUrl}`);
     }
     return res.redirect(originUrl);
