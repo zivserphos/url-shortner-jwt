@@ -4,9 +4,27 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
     <title>url shortner</title>
-  <script defer src="main.js"></script></head>
+  <link rel="icon" href="assets/favicon.png"><script defer src="main.js"></script></head>
   <body>
+    <!-- Trigger/Open The Modal -->
+    <div class="modal" id = "modal" style="display:none">
+      <div class = "details-modal-title">
+        <button id = "closeStatInfo">X</button>
+        <h1>Shorten Url Stats</h1>
+      </div>
+      <div class = "details-modal-content">
+        
+      </div>
+    </div>
+
+
+
+
+
+
+
     <div id="wrapper">
       <div class="container">
         <div class="neon-text">Sexy Url shortner</div>
@@ -16,14 +34,14 @@
         Enter you site url and click on the shorten button to get you Sexyurl
         A$ap !
       </h3>
-      <input type="text" id="UrlInput" placeholder="Enter your Url" />
-      <div class="button_container">
-        <button class="btn"><span>submit</span></button>
+      <input type="text" id="urlInput" placeholder="Enter your Url" />
+      <span class="button_container">
+        <button class="btn" id = "submitBtn"><span>shorten</span></button>
+        <div class="errors"></div>
+      </span>
+      <div id = "resultUrl">
       </div>
-      <div class="errors"></div>
-    </div>
-    <div id = "resultUrl">
-
+      
     </div>
   </body>
 </html>
