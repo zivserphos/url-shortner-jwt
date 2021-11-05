@@ -14,7 +14,7 @@ app.use(cors());
 app.use(urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use("/app", express.static(path.resolve(`./dist`)));
+app.use("/app", express.static(path.resolve(`./server/dist`)));
 app.use("/", reDirectRouter);
 
 //app.use(express.static(path.resolve(`./dist`)));

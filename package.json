@@ -4,7 +4,7 @@
   "description": "API project for freeCodeCamp",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --mode production",
     "start": "node ./index.js",
     "serve": "webpack serve",
     "dev": "nodemon ./index.js"
