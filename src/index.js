@@ -1,7 +1,7 @@
 import axios from "axios";
 import "./styles.scss";
 import "./download.png";
-const Base_Server_Path = ziv - url - shortener.herokuapp.com;
+const Base_Server_Path = "ziv-url-shortener.herokuapp.com";
 
 function createElement(tagName, children = [], classes = [], attributes = {}) {
   // create new element in more comfortable
