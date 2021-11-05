@@ -1,6 +1,5 @@
 import axios from "axios";
 import "./styles.scss";
-const baseServerPath = "http://localhost:3000";
 
 function createElement(tagName, children = [], classes = [], attributes = {}) {
   // create new element in more comfortable
@@ -23,9 +22,7 @@ function createElement(tagName, children = [], classes = [], attributes = {}) {
 async function getStats(event) {
   try {
     const sequence = event.target.dataset.shorturl;
-    const stats = await axios.get(
-      `${baseServerPath}/api/statistic/${sequence}`
-    );
+    const stats = await axios.get(`/api/statistic/${sequence}`);
     return stats;
   } catch (err) {}
 }
@@ -55,7 +52,7 @@ function closeStatsInfo() {
 async function getShortenUrl(originUrl) {
   try {
     const body = { originUrl: `${originUrl}` };
-    const response = await axios.post(`${baseServerPath}/api/shorturl`, body, {
+    const response = await axios.post(`/api/shorturl`, body, {
       headers: {
         "content-type": "application/json",
       },
@@ -75,8 +72,8 @@ async function getShortenUrl(originUrl) {
 
 const createResultDiv = (element, newSequence) => {
   element.appendChild(
-    createElement("a", `${baseServerPath}/${newSequence}`, ["shortLink"], {
-      href: `${baseServerPath}/${newSequence}`,
+    createElement("a", `/${newSequence}`, ["shortLink"], {
+      href: `/${newSequence}`,
     })
   );
   element.appendChild(
