@@ -5,6 +5,10 @@ const fs = require("fs");
 const path = require("path");
 const db = require("../class/db");
 
+reDirectRouter.get("/", (req, res) => {
+  res.redirect("/app");
+});
+
 reDirectRouter.get("/:shortUrl", async (req, res, next) => {
   try {
     const originUrl = await db.getOriginUrl(req.params.shortUrl);
