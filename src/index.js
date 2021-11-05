@@ -22,7 +22,9 @@ function createElement(tagName, children = [], classes = [], attributes = {}) {
 async function getStats(event) {
   try {
     const sequence = event.target.dataset.shorturl;
-    const stats = await axios.get(`/api/statistic/${sequence}`);
+    const stats = await axios.get(
+      `http://localhost:3000/api/statistic/${sequence}`
+    );
     return stats;
   } catch (err) {}
 }
@@ -52,11 +54,15 @@ function closeStatsInfo() {
 async function getShortenUrl(originUrl) {
   try {
     const body = { originUrl: `${originUrl}` };
-    const response = await axios.post(`/api/shorturl`, body, {
-      headers: {
-        "content-type": "application/json",
-      },
-    });
+    const response = await axios.post(
+      `http://localhost:3000/api/shorturl`,
+      body,
+      {
+        headers: {
+          "content-type": "application/json",
+        },
+      }
+    );
     return response;
   } catch (err) {
     const errorMessage = err.response.data.error;
