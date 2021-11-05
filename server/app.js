@@ -14,7 +14,7 @@ app.use(urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use("/", reDirectRouter);
-app.use("/", express.static(`./dist`));
+app.use("/", express.static(`/dist`));
 app.use("/api/shorturl/", shortUrlRouter);
 app.use("/api/statistic", statsRoute);
 app.use(errorHandler);
