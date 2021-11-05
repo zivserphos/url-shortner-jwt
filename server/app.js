@@ -19,8 +19,8 @@ app.use("/api/shorturl/", shortUrlRouter);
 app.use("/api/statistic", statsRoute);
 app.use(errorHandler);
 
-// app.get("/", (req, res) => {
-//   res.sendFile(__dirname + "../src/index.html");
-// });
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/dist/index.html");
+});
 
 module.exports = app;

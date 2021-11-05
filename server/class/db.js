@@ -63,7 +63,7 @@ class DataBase {
       await fsAsync.writeFile("./server/db.json", JSON.stringify(dataBase));
       return newObj.shortUrl;
     } catch (err) {
-      throw "current unable to save urlS";
+      throw "current unable to to short url";
     }
   }
 
