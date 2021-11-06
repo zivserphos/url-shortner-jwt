@@ -26,7 +26,9 @@ function createElement(tagName, children = [], classes = [], attributes = {}) {
 async function getStats(event) {
   try {
     const sequence = event.target.dataset.shorturl;
-    const stats = await axios.get(`/api/statistic/${sequence}`);
+    const stats = await axios.get(
+      `http://localhost:3000/api/statistic/${sequence}`
+    );
     return stats;
   } catch (err) {}
 }
@@ -50,17 +52,21 @@ function closeStatsInfo() {
   const modal = document.getElementById("modal");
   document.querySelector(".details-modal-content").textContent = "";
   modal.style.display = "none";
-  document.getElementById("wrapper").style.display = "flex";
+  document.getElementById("wrapper").style.display = "block";
 }
 
 async function getShortenUrl(originUrl) {
   try {
     const body = { originUrl: `${originUrl}` };
-    const response = await axios.post(`/api/shorturl`, body, {
-      headers: {
-        "content-type": "application/json",
-      },
-    });
+    const response = await axios.post(
+      `http://localhost:3000/api/shorturl`,
+      body,
+      {
+        headers: {
+          "content-type": "application/json",
+        },
+      }
+    );
     return response;
   } catch (err) {
     const errorMessage = err.response.data.error;
@@ -76,15 +82,20 @@ async function getShortenUrl(originUrl) {
 
 const createResultDiv = (element, newSequence) => {
   element.appendChild(
-    createElement("a", `${Base_Server_Path}/${newSequence}`, ["shortLink"], {
+    createElement("a", `${Base_Server_Path}/${newSequence}`, [], {
       href: `/${newSequence}`,
+      id: "shortLink",
     })
   );
   element.appendChild(
     createElement(
       "button",
-      [createElement("span", "stats", [], { "data-shorturl": newSequence })],
-      ["statsBtn", "btn"],
+      [
+        createElement("span", "stats", [], {
+          "data-shorturl": newSequence,
+        }),
+      ],
+      ["orange", "retro-button-filled"],
       { "data-shorturl": newSequence }
     )
   );
