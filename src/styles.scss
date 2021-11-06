@@ -1,293 +1,234 @@
-@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@500&family=Teko:wght@300&family=Ubuntu:ital,wght@0,500;1,400&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,500;1,400&display=swap");
-#wrapper {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
+@import url('https://fonts.googleapis.com/css2?family=Mr+Dafoe&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chicle&family=Piedra&display=swap');
+
+
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  }
+  
+  .modal {
+    background: #ffffff;
+    border-radius: 0.5em;
+    box-shadow: 0 10px 20px rgba(black, 0.2);
+    left: 50%;
+    max-width: 90%;
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 30em;
+    text-align: left;
+    max-height: 70vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .modal .details-modal-title {
+    color: #111827;
+    padding: 1.5em 2em;
+    pointer-events: all;
+    position: relative;
+    width: calc(100% - 4.5em);
+  
+    h1.retro {
+      font-size: 2.25rem;
+      font-weight: 700;
+      line-height: normal;
+    }
+  }
+  
+  .details-modal-content {
+    height: 50%;
+    border-top: 5px solid #e0e0e0;
+    padding: 2em;
+    pointer-events: all;
+    overflow: auto;
+  }
+  
+  #closeStatInfo {
+    text-align: center;
+    position: relative;
+    font-size: 110%;
+    left: 115%;
+    color: darkred;
+    transition: 30s;
+    display: block;
+    width: 3vw;
+    height: 3vh;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: 0.4s;
+  }
+  
+  #closeStatInfo:hover {
+    color: green;
+    text-shadow: indigo 5px 10px 15px;
+  }
+  
+  .statLi {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: bold;
+    font-size: 1.25rem;
+    width: 100%;
+    height: 50%;
+    color: black;
+  }
+
+body, html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
 }
-h3 {
-  font-family: "Ubuntu", sans-serif;
-}
-h4 {
-  font-family: "Ubuntu", sans-serif;
-}
-$brown: #2b2520;
-$green: #39dbc2;
-$pink: #f41fbf;
-$yellow: #ffed28;
-$purple: #b028ff;
-$blue: #49a7ff;
-$red: #ff3838;
-$orange: #db7953;
-// Font
-@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
-// Size
-$extra-large: 110px;
-$large: 50px;
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-}
-@mixin center {
+
+body {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  background: radial-gradient(rgba(#7600bf, 0.5) 0%, transparent 70%), linear-gradient(#0b161e 40%, #202076 70%);
+  perspective: 700px;
+  font-size: clamp(10px, 2vw, 20px);
 }
-body {
-  @include center;
-}
-.container {
-  * {
-    margin: 20px 0;
-  }
-  .neon-text {
-    $random-text: "Sexy Url shortner";
-    position: relative;
-    $stroke-width: $large * 0.01;
-    font-family: "Pacifico", cursive;
-    text-transform: uppercase;
-    font-size: $large;
-    color: lighten($pink, 25%);
-    -webkit-text-stroke-width: $stroke-width;
-    -webkit-text-stroke-color: lighten($pink, 5%);
-    @include center;
-    text-shadow: 0 0 40px lighten($pink, 5%), 0 0 40px lighten($pink, 5%),
-      0 0 40px lighten($pink, 5%);
-    &:after {
-      content: $random-text;
-      z-index: -1;
-      position: absolute;
-      color: transparent;
-      -webkit-text-stroke-width: $stroke-width;
-      -webkit-text-stroke-color: darken($pink, 80%);
-      top: 1%;
-      // left: 0.5px;
-    }
-  }
-}
-// button section
-@import url("https://fonts.googleapis.com/css?family=Amatic+SC");
-.button_container {
-  margin-top: 7vh;
-  position: flex;
+
+.lines {
+  $color: #59c1fe;
+  position: fixed;
+  width: 100vw;
+  height: 4em;
+  background: linear-gradient(rgba($color, 0.2) 20%, $color 40%, $color 60%, rgba($color, 0.2) 80%);
+  background-size: 1px 0.5em;
+  box-shadow: 0 0 1em rgba($color, 0.4);
+  transform: translateY(-1em);
   left: 0;
-  right: 0;
-  top: 50vh;
 }
-.btn {
-  border: none;
-  display: block;
-  text-align: center;
-  cursor: pointer;
-  text-transform: uppercase;
-  outline: none;
-  overflow: hidden;
+
+h1.retro {
   position: relative;
-  color: #fff;
-  font-weight: 700;
-  font-size: 15px;
-  background-color: #222;
-  padding: 17px 60px;
-  margin: 0 auto;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  font-family: 'Exo';
+  font-size: 9em;
+  margin: 0;
+  transform: skew(-15deg);
+  letter-spacing: 0.03em;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: -0.1em;
+    right: 0.05em;
+    width: 0.4em;
+    height: 0.4em;
+    background: 
+      radial-gradient(white 3%, rgba(white, 0.3) 15%, rgba(white, 0.05) 60%, transparent 80%),
+      radial-gradient(rgba(white, 0.2) 50%, transparent 60%) 50% 50% / 5% 100%,
+      radial-gradient(rgba(white, 0.2) 50%, transparent 60%) 50% 50% / 70% 5%;
+    background-repeat: no-repeat;
+  }
+  
+  span.textDesign:first-child {
+    display: block;
+    text-shadow: 0 0 0.1em #8ba2d0, 0 0 0.2em black,  0 0 5em #165ff3;
+    -webkit-text-stroke: 0.06em rgba(black, 0.5);
+  }
+  
+  span.textDesign:last-child {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-image: linear-gradient(#032d50 25%, #00a1ef 35%, white 50%, #20125f 50%, #8313e7 55%, #ff61af 75%);
+    -webkit-text-stroke: 0.01em #94a0b9;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
-.btn span {
-  position: relative;
-  z-index: 1;
+
+h2 {
+  font-family: 'chicle';
+  margin: 0;
+  font-size: 4.7em;
+  margin-top: -0.6em;
+  color: white;
+  text-shadow: 0 0 0.05em #fff, 0 0 0.2em #fe05e1, 0 0 0.3em #fe05e1;
+  transform: rotate(-7deg);
 }
-.btn:after {
-  content: "";
+
+h3 {
+  font-family: 'chicle';
+  text-shadow: 0 0 0.05em #fff, 0 0 0.2em black, 0 0 0.3em black;
+  font-size: 2.5rem;
+  margin-top: -0.4em;
+  transform: rotate(-5deg);
+}
+
+h4 {
+  font-family: 'chicle';
+  text-shadow: 0 0 0.05em #fff, 0 0 0.2em black, 0 0 0.3em black;
+  font-size: 2rem;
+  color:blue;
+}
+
+.grid {
+  $main: #7d41e6;
+  $glow: rgba(#2e26ff, 0.4);
+  background: 
+    linear-gradient(transparent 65%, $glow 75%, $main 80%, $glow 85%, transparent 95%),
+    linear-gradient(90deg, transparent 65%, $glow 75%, $main 80%, $glow 85%, transparent 95%);
+  background-size: 30px 30px;
+  width: 200vw;
+  height: 300vh;
   position: absolute;
-  left: 0;
-  top: 0;
-  height: 490%;
-  width: 140%;
-  background: $pink;
-  -webkit-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
-  -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
-  transform: translateX(-98%) translateY(-25%) rotate(45deg);
+  bottom: -120vh;
+  transform: rotateX(-100deg);
+  -webkit-mask-image: linear-gradient(rgba(0,0,0,1), rgba(0,0,0,0) 80%);
 }
-.btn:hover:after {
-  -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
-  transform: translateX(-9%) translateY(-25%) rotate(45deg);
+
+.green {
+  background-color: rgb(75, 135, 71);
+  box-shadow: 0px 0px 0px 1px rgb(75, 135, 71),
+              inset 0px 0px 0px 1px rgb(75, 135, 71),
+              0px 2px 0px 2px rgb(85, 134, 82);
 }
-//background section
-// background
-/* Cool infinite background scrolling animation.
- * Twitter: @kootoopas
- */
-/* Exo thin font from Google. */
-@import url(https://fonts.googleapis.com/css?family=Exo:100);
-/* Background data (Original source: https://subtlepatterns.com/grid-me/) */
-$bg-url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/UpuzVzWEi1atGjRokWLFi1atGjRokWLFi1atGjRokWLFi1af7Ukz8xWp8z8AAAA//8DAJ4LoEAAlL1nAAAAAElFTkSuQmCC";
-$bg-width: 50px;
-$bg-height: 50px;
-/* Animations */
-@-webkit-keyframes bg-scrolling-reverse {
-  100% {
-    background-position: $bg-width $bg-height;
-  }
+.green:active {
+  background-color: rgb(54, 138, 48);
+  box-shadow: 0px 0px 0px 1px rgb(54, 138, 48),
+              inset 0px 0px 0px 1px rgb(54, 138, 48),
+              0px 1px 0px 2px rgb(64, 137, 60);
 }
-@-moz-keyframes bg-scrolling-reverse {
-  100% {
-    background-position: $bg-width $bg-height;
-  }
-}
-@-o-keyframes bg-scrolling-reverse {
-  100% {
-    background-position: $bg-width $bg-height;
-  }
-}
-@keyframes bg-scrolling-reverse {
-  100% {
-    background-position: $bg-width $bg-height;
-  }
-}
-@-webkit-keyframes bg-scrolling {
-  0% {
-    background-position: $bg-width $bg-height;
-  }
-}
-@-moz-keyframes bg-scrolling {
-  0% {
-    background-position: $bg-width $bg-height;
-  }
-}
-@-o-keyframes bg-scrolling {
-  0% {
-    background-position: $bg-width $bg-height;
-  }
-}
-@keyframes bg-scrolling {
-  0% {
-    background-position: $bg-width $bg-height;
-  }
-}
-/* Main styles */
-body {
-  margin-top: 3.5vh;
-  color: #999;
-  text-align: center;
-  /* img size is 50x50 */
-  background: url($bg-url) repeat 0 0;
-  -webkit-animation: bg-scrolling-reverse 0.92s infinite; /* Safari 4+ */
-  -moz-animation: bg-scrolling-reverse 0.92s infinite; /* Fx 5+ */
-  -o-animation: bg-scrolling-reverse 0.92s infinite; /* Opera 12+ */
-  animation: bg-scrolling-reverse 0.92s infinite; /* IE 10+ */
-  -webkit-animation-timing-function: linear;
-  -moz-animation-timing-function: linear;
-  -o-animation-timing-function: linear;
-  animation-timing-function: linear;
-  &::before {
-    font-size: 8rem;
-    font-weight: 100;
-    font-style: normal;
-  }
+
+.retro-button-filled {
+  transform: rotate(-7deg);
+  padding: 0.4rem;
+  margin: 1rem;
+  outline: none;
+  border: 3px solid white;
+  border-radius: 0.3em;
+  color: white;
+  font-family: "chicle";
+  font-size: 2.6em;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 #urlInput {
-  border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  text-align: center;
-  border: 0.5px grey solid;
-  transform: scale(1.5);
-  width: 50%;
-  margin: auto;
-  font-family: "Dosis", sans-serif;
-}
-
-#resultUrl {
-  margin-top: 10vh;
-  font-family: "Dosis", sans-serif;
-}
-
-.errors {
-  font-weight: bold;
-  font-family: "Ubuntu", sans-serif;
-  font-size: 5.5vh;
-  color: $red;
-}
-
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
-
-.modal {
-  background: #ffffff;
-  border-radius: 0.5em;
-  box-shadow: 0 10px 20px rgba(black, 0.2);
-  left: 50%;
-  max-width: 90%;
-  pointer-events: none;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 30em;
-  text-align: left;
-  max-height: 70vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.modal .details-modal-title {
-  color: #111827;
-  padding: 1.5em 2em;
-  pointer-events: all;
-  position: relative;
-  width: calc(100% - 4.5em);
-
-  h1 {
-    font-size: 2.25rem;
-    font-weight: 700;
-    line-height: normal;
-  }
-}
-
-.details-modal-content {
-  height: 50%;
-  border-top: 5px solid #e0e0e0;
-  padding: 2em;
-  pointer-events: all;
-  overflow: auto;
-}
-
-#closeStatInfo {
-  text-align: center;
-  position: relative;
-  font-size: 110%;
-  left: 115%;
-  color: darkred;
-  transition: 30s;
-  display: block;
-  width: 3vw;
-  height: 3vh;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  transition: 0.4s;
-}
-
-#closeStatInfo:hover {
-  color: green;
-  text-shadow: indigo 5px 10px 15px;
-}
-
-.statLi {
-  font-family: "Ubuntu", sans-serif;
-  font-weight: bold;
-  font-size: 1.25rem;
-  width: 100%;
-  height: 50%;
-  color: black;
+  transform: rotate(7deg);
+  padding: 0.4rem;
+  margin: 1rem;
+  outline: none;
+  border: 3px solid white;
+  border-radius: 0.3em;
+  color: ffffff;
+  font-family: "chicle";
+  font-size: 2.6em;
+  font-weight: 700;
 }
