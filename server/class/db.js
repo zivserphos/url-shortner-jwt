@@ -31,7 +31,8 @@ class DataBase {
 
   static async #createUrlObj(_originUrl) {
     let newShortCut = await this.#createShortCut();
-    while (await this.#checkIfUrlExist(newShortCut)) {
+    let isExist = await this.#checkIfUrlExist(newShortCut);
+    while (!isExist) {
       newShortCut = await this.#createShortCut();
     }
     const urlObj = {
