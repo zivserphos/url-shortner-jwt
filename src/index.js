@@ -3,6 +3,7 @@ import "./styles.scss";
 import "./download.png";
 
 const Base_Server_Path = "ziv-url-shortener.herokuapp.com";
+console.log(Base_Server_Path);
 
 function createElement(tagName, children = [], classes = [], attributes = {}) {
   // create new element in more comfortable
@@ -23,17 +24,15 @@ function createElement(tagName, children = [], classes = [], attributes = {}) {
 }
 
 async function getStats(event) {
-  const sequence = event.target.dataset.shorturl;
-  return await axios.get(`/api/statistic/${sequence}`);
+  try {
+    const sequence = event.target.dataset.shorturl;
+    const stats = await axios.get(`/api/statistic/${sequence}`);
+    return stats;
+  } catch (err) {}
 }
 
 async function handlerStat(event) {
-  let stats;
-  try {
-    stats = await getStats(event);
-  } catch (err) {
-    throw "invalid";
-  }
+  const stats = await getStats(event);
   const modal = document.getElementById("modal");
   modal.style.display = "flex";
   document.getElementById("wrapper").style.display = "none";
@@ -65,6 +64,7 @@ async function getShortenUrl(originUrl) {
     return response;
   } catch (err) {
     const errorMessage = err.response.data.error;
+    console.log(errorMessage);
     clearResultDiv();
     const errorsDiv = document.querySelector(".errors");
     errorsDiv.textContent = errorMessage;
