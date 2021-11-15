@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const { urlencoded } = require("body-parser");
 const shortUrlRouter = require("./routes/shortUrlRoute");
-const loginRouter = require("./routes/login")
+const loginRouter = require("./routes/login");
 const statsRoute = require("./routes/statsRoute");
 const errorHandler = require("./handlers/errorHandler");
 const reDirectRouter = require("./routes/reDircetRouter");
@@ -17,7 +17,16 @@ app.use(express.json());
 
 app.use("/app", express.static(path.resolve(`./server/dist`)));
 
-app.use("/login" , loginRouter)
+app.use("/login", loginRouter);
+
+app.get("/app/login", (req, res) => {
+  res.sendFile(path.resolve("./server/dist/login.html"));
+});
+
+app.get("/app/signUp", (req, res) => {
+  res.sendFile(path.resolve("./server/dist/signUp.html"));
+});
+
 app.use("/", reDirectRouter);
 //app.use(express.static(path.resolve(`./dist`)));
 
@@ -26,7 +35,7 @@ app.use("/api/statistic", statsRoute);
 app.use(errorHandler);
 
 app.get("/app", (req, res) => {
-  res.sendFile(__dirname + "/dist/index.html");
+  res.sendFile(path.resolve("./dist/index.html"));
 });
 
 module.exports = app;

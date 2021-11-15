@@ -9,7 +9,11 @@ const isProduction = process.env.NODE_ENV == "production";
 const stylesHandler = "style-loader";
 
 const config = {
-  entry: "./src/index.js",
+  entry: {
+    index: "./src/index.js",
+    login: "./src/loginFront/index.js",
+    signUp: "./src/signUpFront/index.js",
+  },
   output: {
     path: path.resolve(__dirname, "./server/dist"),
   },
@@ -20,7 +24,19 @@ const config = {
   plugins: [
     new FaviconsWebpackPlugin("./src/download.png"),
     new HtmlWebpackPlugin({
+      filename: "index.html",
       template: "src/index.html",
+      chunks: ["index"],
+    }),
+    new HtmlWebpackPlugin({
+      filename: "login.html",
+      template: "src/loginFront/login.html",
+      chunks: ["login"],
+    }),
+    new HtmlWebpackPlugin({
+      filename: "signUp.html",
+      template: "src/signUpFront/signUp.html",
+      chunks: ["signUp"],
     }),
 
     // Add your plugins here
