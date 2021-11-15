@@ -2,7 +2,7 @@ import axios from "axios";
 import "./styles.scss";
 import "./download.png";
 
-const Base_Server_Path = "ziv-url-shortener.herokuapp.com";
+const Base_Server_Path = "http://localhost:3000";
 console.log(Base_Server_Path);
 
 function createElement(tagName, children = [], classes = [], attributes = {}) {
@@ -26,7 +26,7 @@ function createElement(tagName, children = [], classes = [], attributes = {}) {
 async function getStats(event) {
   try {
     const sequence = event.target.dataset.shorturl;
-    const stats = await axios.get(`/api/statistic/${sequence}`);
+    const stats = await axios.get(`${Base_Server_Path}/api/statistic/${sequence}`);
     return stats;
   } catch (err) {}
 }
@@ -56,7 +56,7 @@ function closeStatsInfo() {
 async function getShortenUrl(originUrl) {
   try {
     const body = { originUrl: `${originUrl}` };
-    const response = await axios.post(`/api/shorturl`, body, {
+    const response = await axios.post(`${Base_Server_Path}/api/shorturl`, body, {
       headers: {
         "content-type": "application/json",
       },
