@@ -61,6 +61,7 @@ async function getShortenUrl(originUrl) {
         "content-type": "application/json",
       },
     });
+    console.log(response.data.shorturl)
     return response;
   } catch (err) {
     const errorMessage = err.response.data.error;

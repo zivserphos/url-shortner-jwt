@@ -24,7 +24,7 @@ const urlSchema = new mongoose.Schema({
 
 })
 
-urlSchema.plugin(uniqueValidator , { message: 'Error, expected {PATH} to be unique.' })
+urlSchema.plugin(uniqueValidator)
 const Url = mongoose.model("urls" , urlSchema);
 
 module.exports = Url;

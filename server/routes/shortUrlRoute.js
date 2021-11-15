@@ -36,7 +36,7 @@ function createShortUrl()  {
 function createObj(originUrl) {
   const urlObj = {
     originUrl: originUrl,
-    shortUrl: "2A8X59C",
+    shortUrl: createShortUrl(),
     views: 0,
     creatorDate: moment().toDate(),
   };
@@ -52,9 +52,7 @@ shortUrlRouter.post("/", async (req, res, next) => {
     }
     if (isURL(originUrl)) {
       const obj = createObj(originUrl)
-      const response = await Url.insertMany(obj)
-      console.log(response)
-      return
+      return await Url.insertMany(obj)
       //return res.send(await dataBase.addObjToDb(req.body.originUrl));
     } else {
       throw "INVALID URL";
@@ -62,6 +60,14 @@ shortUrlRouter.post("/", async (req, res, next) => {
   } catch (err) {
     if (err === "INVALID URL" || err === "url is too long") {
       return next({ status: 400, message: { error: err } });
+    }
+    if (err.message.includes("originUrl")) {
+        const originUrl = err.errors.originUrl.value
+        const shortUrl = (await Url.findOne({originUrl: originUrl})).shortUrl
+        return res.send(shortUrl)
+    }
+    if (err.message.includes("shortUrl")) {
+        
     }
     return next({ message: { error: err } });
   }
