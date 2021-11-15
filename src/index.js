@@ -78,7 +78,7 @@ async function getShortenUrl(originUrl) {
 const createResultDiv = (element, newSequence) => {
   element.appendChild(
     createElement("a", `${Base_Server_Path}/${newSequence}`, [], {
-      href: `/${newSequence}`,
+      href: `${Base_Server_Path}/${newSequence}`,
       id: "shortLink",
     })
   );

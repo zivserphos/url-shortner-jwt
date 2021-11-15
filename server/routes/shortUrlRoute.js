@@ -1,16 +1,13 @@
 const express = require("express");
 const shortUrlRouter = express.Router();
-const mongoose = require("mongoose")
-const moment = require("moment")
-const User = require("../modal/userSchema")
-const Url = require("../modal/urlsSchema")
+const mongoose = require("mongoose");
+const moment = require("moment");
+const User = require("../modal/userSchema");
+const Url = require("../modal/urlsSchema");
 const env = require("dotenv").config();
-const url = process.env.URL
-const fs = require("fs");
+const url = process.env.URL;
 const path = require("path");
-const dataBase = require("../class/db");
 const { isURL } = require("validator");
-const { response } = require("express");
 
 mongoose.connect(url);
 const db = mongoose.connection;
@@ -20,7 +17,7 @@ db.once("open", function () {
   console.log("Connected successfully");
 });
 
-function createShortUrl()  {
+function createShortUrl() {
   const created = true;
   let shortUrl = "";
   for (let i = 0; i < 7; i++) {
@@ -45,15 +42,16 @@ function createObj(originUrl) {
 
 shortUrlRouter.post("/", async (req, res, next) => {
   try {
-    console.log("i am here")
-    const originUrl = req.body.originUrl
+    console.log("i am here");
+    const originUrl = req.body.originUrl;
     if (originUrl.length > 200) {
       throw "url is too long";
     }
     if (isURL(originUrl)) {
-      const obj = createObj(originUrl)
-      return await Url.insertMany(obj)
-      //return res.send(await dataBase.addObjToDb(req.body.originUrl));
+      const obj = createObj(originUrl);
+      console.log(obj)
+      await Url.insertMany(obj);
+      return res.send(obj.shortUrl);
     } else {
       throw "INVALID URL";
     }
@@ -62,12 +60,11 @@ shortUrlRouter.post("/", async (req, res, next) => {
       return next({ status: 400, message: { error: err } });
     }
     if (err.message.includes("originUrl")) {
-        const originUrl = err.errors.originUrl.value
-        const shortUrl = (await Url.findOne({originUrl: originUrl})).shortUrl
-        return res.send(shortUrl)
+      const originUrl = err.errors.originUrl.value;
+      const shortUrl = (await Url.findOne({ originUrl: originUrl })).shortUrl;
+      return res.send(shortUrl);
     }
     if (err.message.includes("shortUrl")) {
-        
     }
     return next({ message: { error: err } });
   }

@@ -9,12 +9,14 @@ const bcrypt = require("bcrypt");
 const app = require("../app");
 
 loginRouter.get("/", async (req, res, next) => {
-    const user = req.body.user ? req.body.user : "BAD"
-    const user2 = {
-        name: "sfhg"
-    }
+    const user = req.body.user
+    if (!user) {}
+    const user2 = {}
     const accessToken = generateAccessToken(user2);
-    res.send(accessToken)
+    res.cookie("token" ,accessToken , {
+      maxAge: 50000
+    })
+    res.send("cookies are the best")
 })
 
 function generateAccessToken(user2) {
