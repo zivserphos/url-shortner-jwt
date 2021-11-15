@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const { urlencoded } = require("body-parser");
 const shortUrlRouter = require("./routes/shortUrlRoute");
+const loginRouter = require("./routes/login")
 const statsRoute = require("./routes/statsRoute");
 const errorHandler = require("./handlers/errorHandler");
 const reDirectRouter = require("./routes/reDircetRouter");
@@ -15,8 +16,9 @@ app.use(urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use("/app", express.static(path.resolve(`./server/dist`)));
-app.use("/", reDirectRouter);
 
+app.use("/login" , loginRouter)
+app.use("/", reDirectRouter);
 //app.use(express.static(path.resolve(`./dist`)));
 
 app.use("/api/shorturl/", shortUrlRouter);
