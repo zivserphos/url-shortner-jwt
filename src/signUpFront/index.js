@@ -1,5 +1,7 @@
 import axios from "axios";
 import "./styles.scss";
+
+// eslint-disable-next-line camelcase
 const Base_Server_Path = "http://localhost:3000";
 
 async function createNewUser(event) {
@@ -11,11 +13,14 @@ async function createNewUser(event) {
     email: document.getElementById("email").value,
   };
   try {
-    const response = await axios.post(`${Base_Server_Path}/signUp`, {
+    // eslint-disable-next-line camelcase
+    await axios.post(`${Base_Server_Path}/signUp`, {
       newUser,
     });
+    console.log("window.location");
+    window.location.href = "/app/login";
   } catch (err) {
-    throw err;
+    alert("sign up failed");
   }
 }
 

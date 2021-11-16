@@ -1,19 +1,21 @@
 const express = require("express");
+const bcrypt = require("bcrypt");
 const User = require("../modal/userSchema");
-const env = require("dotenv").config();
-const secret = process.env.SECRET;
-console.log(secret);
-const signUpRouter = express.Router();
-const cookieParser = require("cookie-parser");
-const jwt = require("jsonwebtoken");
-const app = require("../app");
+require("dotenv").config();
 
-signUpRouter.post("/", async (req, res) => {
+const signUpRouter = express.Router();
+
+signUpRouter.post("/", async (req, res, next) => {
   // try and catch / bcrypt
-  console.log("im in sign up router");
-  const newUser = req.body.newUser;
-  console.log(newUser);
-  console.log(await User.create(newUser));
+  const { newUser } = req.body;
+  const salt = await bcrypt.genSalt(10);
+  const encryptPassword = await bcrypt.hash(newUser.password, salt);
+  newUser.password = encryptPassword;
+  try {
+    return res.send(await User.insertMany(newUser));
+  } catch (err) {
+    return next({ status: 400, message: err.message });
+  }
 });
 
 module.exports = signUpRouter;

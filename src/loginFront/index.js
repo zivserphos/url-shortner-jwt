@@ -1,5 +1,7 @@
 import "./styles.scss";
 import axios from "axios";
+
+// eslint-disable-next-line camelcase
 const Base_Server_Path = "http://localhost:3000";
 
 async function createToken(event) {
@@ -8,13 +10,14 @@ async function createToken(event) {
   const password = document.getElementById("password").value;
 
   try {
-    const response = await axios.post(`${Base_Server_Path}/login`, {
+    // eslint-disable-next-line camelcase
+    await axios.post(`${Base_Server_Path}/login`, {
       password,
       userName,
     });
     window.location.href = "/app";
+    return false;
   } catch (err) {
-    console.log(err);
     alert("cannot login");
   }
 }
@@ -23,4 +26,4 @@ document
   .getElementById("login")
   .addEventListener("click", (event) => createToken(event));
 
-//console.log(document.getElementById("login"));
+// console.log(document.getElementById("login"));

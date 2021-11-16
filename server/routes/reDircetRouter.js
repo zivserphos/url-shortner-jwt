@@ -1,9 +1,7 @@
 const express = require("express");
-const cors = require("cors");
+const User = require("../modal/userSchema");
+
 const reDirectRouter = express.Router();
-const fs = require("fs");
-const path = require("path");
-const db = require("../class/db");
 
 reDirectRouter.get("/", (req, res) => {
   res.redirect("/app");
@@ -11,17 +9,17 @@ reDirectRouter.get("/", (req, res) => {
 
 reDirectRouter.get("/:shortUrl", async (req, res, next) => {
   try {
-    const originUrl = await db.getOriginUrl(req.params.shortUrl);
+    const { originUrl } = await User.findOne({ shorturl: req.params.shortUrl });
     if (!originUrl) {
       throw { status: 404, message: { error: "Invalid Url" } };
     }
-    let startsWith = originUrl.slice(0, 4);
+    const startsWith = originUrl.slice(0, 4);
     if (startsWith.toLowerCase() !== "http") {
       return res.redirect(`http://${originUrl}`);
     }
     return res.redirect(originUrl);
   } catch (err) {
-    next(err);
+    return next(err);
   }
 });
 

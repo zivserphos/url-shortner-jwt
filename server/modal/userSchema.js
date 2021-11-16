@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
+
 uniqueValidator.defaults.message = "Error, expected {PATH} to be unique.";
 
 const userSchema = new mongoose.Schema({
