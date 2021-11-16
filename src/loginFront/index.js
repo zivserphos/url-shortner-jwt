@@ -2,7 +2,8 @@ import "./styles.scss";
 import axios from "axios";
 const Base_Server_Path = "http://localhost:3000";
 
-async function createToken() {
+async function createToken(event) {
+  event.preventDefault();
   const userName = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
@@ -18,6 +19,8 @@ async function createToken() {
   }
 }
 
-document.getElementById("login").addEventListener("click", createToken);
+document
+  .getElementById("login")
+  .addEventListener("click", (event) => createToken(event));
 
 //console.log(document.getElementById("login"));

@@ -14,19 +14,19 @@ loginRouter.post("/", async (req, res, next) => {
     userName: req.body.userName,
     password: req.body.password,
   };
-  console.log("boolbool");
   const user = await User.findOne({ userName: userData.userName });
   console.log(user);
   if (!user) throw "problem";
   if (user.password === userData.password) {
     const accessToken = generateAccessToken(user);
     res.cookie("token", accessToken, { maxAge: 100000 });
+    res.send();
+    //res.redirect("/app/");
   }
 });
 
 function generateAccessToken(user) {
-  console.log(user);
-  return jwt.sign(user, secret, { expiresIn: "600s" });
+  return jwt.sign({}, secret, { expiresIn: "600s" });
 }
 
 loginRouter.get("/", (req, res) => {
