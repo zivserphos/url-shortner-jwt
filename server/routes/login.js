@@ -1,41 +1,37 @@
+/* eslint-disable no-use-before-define */
 const express = require("express");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 const User = require("../modal/userSchema");
-const env = require("dotenv").config();
+
 const secret = process.env.SECRET;
 const loginRouter = express.Router();
-const cookieParser = require("cookie-parser");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-const app = require("../app");
 
-loginRouter.get("/", async (req, res, next) => {
-    const user = req.body.user ? req.body.user : "BAD"
-    const user2 = {
-        name: "sfhg"
+loginRouter.post("/", async (req, res, next) => {
+  const userData = {
+    userName: req.body.userName,
+    password: req.body.password,
+  };
+  try {
+    const user = await User.findOne({ userName: userData.userName });
+    if (user.password === userData.password) {
+      const accessToken = generateAccessToken(user);
+      res.cookie("token", accessToken, { maxAge: 3600000 });
+      res.send();
+    } else {
+      throw { status: 401, message: { error: "WRONG PASSWORD" } };
     }
-    const accessToken = generateAccessToken(user2);
-    res.send(accessToken)
-})
+  } catch (err) {
+    next(err);
+  }
+});
 
-function generateAccessToken(user2) {
-  return jwt.sign(user2, secret, { expiresIn: '10s' });
+// loginRouter.delete("/logout");
+
+function generateAccessToken(user) {
+  return jwt.sign({ user }, secret, { expiresIn: "1h" });
 }
 
-loginRouter.get("/" , (req ,res) => {
-    return res.send("fsafs")
-})
-
-function authenticateToken(req, res, next) {
-    const authHeader = req.headers["authorization"];
-    const token = authHeader && authHeader.split(" ")[1];
-    if (token == null) return res.sendStatus(401);
-  
-    jwt.verify(token, process.env.secret, (err, user) => {
-      // console.log(err);
-      if (err) return res.sendStatus(403);
-      req.user = user;
-      next();
-    });
-  }
+loginRouter.get("/", (req, res) => res.send("fsafs"));
 
 module.exports = loginRouter;

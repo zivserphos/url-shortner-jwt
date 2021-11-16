@@ -2,21 +2,21 @@ import axios from "axios";
 import "./styles.scss";
 import "./download.png";
 
+// eslint-disable-next-line camelcase
 const Base_Server_Path = "http://localhost:3000";
-console.log(Base_Server_Path);
 
 function createElement(tagName, children = [], classes = [], attributes = {}) {
   // create new element in more comfortable
   const el = document.createElement(tagName);
-  for (let child of children) {
+  for (const child of children) {
     // append childs of element
     el.append(child);
   }
-  for (let cls of classes) {
+  for (const cls of classes) {
     // add all the classes to the element
     el.classList.add(cls);
   }
-  for (let attr in attributes) {
+  for (const attr in attributes) {
     // add all attributes to the element
     el.setAttribute(attr, attributes[attr]);
   }
@@ -26,9 +26,11 @@ function createElement(tagName, children = [], classes = [], attributes = {}) {
 async function getStats(event) {
   try {
     const sequence = event.target.dataset.shorturl;
-    const stats = await axios.get(`${Base_Server_Path}/api/statistic/${sequence}`);
+    const stats = await axios.get(
+      `${Base_Server_Path}/api/statistic/${sequence}`
+    );
     return stats;
-  } catch (err) {}
+  } catch (err) {} // complete error handling
 }
 
 async function handlerStat(event) {
@@ -36,7 +38,7 @@ async function handlerStat(event) {
   const modal = document.getElementById("modal");
   modal.style.display = "flex";
   document.getElementById("wrapper").style.display = "none";
-  for (let stat in stats.data) {
+  for (const stat in stats.data) {
     const statData = createElement(
       "LI",
       [`${stat}: ${stats.data[stat]}`],
@@ -56,12 +58,16 @@ function closeStatsInfo() {
 async function getShortenUrl(originUrl) {
   try {
     const body = { originUrl: `${originUrl}` };
-    const response = await axios.post(`${Base_Server_Path}/api/shorturl`, body, {
-      headers: {
-        "content-type": "application/json",
-      },
-    });
-    console.log(response.data.shorturl)
+    const response = await axios.post(
+      `${Base_Server_Path}/api/shorturl`,
+      body,
+      {
+        headers: {
+          "content-type": "application/json",
+        },
+      }
+    );
+    console.log(response.data.shorturl);
     return response;
   } catch (err) {
     const errorMessage = err.response.data.error;
