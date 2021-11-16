@@ -26,7 +26,9 @@ function createElement(tagName, children = [], classes = [], attributes = {}) {
 async function getStats(event) {
   try {
     const sequence = event.target.dataset.shorturl;
-    const stats = await axios.get(`${Base_Server_Path}/api/statistic/${sequence}`);
+    const stats = await axios.get(
+      `${Base_Server_Path}/api/statistic/${sequence}`
+    );
     return stats;
   } catch (err) {}
 }
@@ -56,12 +58,16 @@ function closeStatsInfo() {
 async function getShortenUrl(originUrl) {
   try {
     const body = { originUrl: `${originUrl}` };
-    const response = await axios.post(`${Base_Server_Path}/api/shorturl`, body, {
-      headers: {
-        "content-type": "application/json",
-      },
-    });
-    console.log(response.data.shorturl)
+    const response = await axios.post(
+      `${Base_Server_Path}/api/shorturl`,
+      body,
+      {
+        headers: {
+          "content-type": "application/json",
+        },
+      }
+    );
+    console.log(response.data.shorturl);
     return response;
   } catch (err) {
     const errorMessage = err.response.data.error;

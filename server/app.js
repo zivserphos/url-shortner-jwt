@@ -9,12 +9,13 @@ const errorHandler = require("./handlers/errorHandler");
 const reDirectRouter = require("./routes/reDircetRouter");
 const app = express();
 const path = require("path");
+const cookieParser = require("cookie-parser");
 
 app.use(cors());
 // body-parser
 app.use(urlencoded({ extended: true }));
 app.use(express.json());
-
+app.use(cookieParser());
 app.use("/app", express.static(path.resolve(`./server/dist`)));
 
 app.use("/login", loginRouter);
