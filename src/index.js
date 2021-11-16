@@ -3,7 +3,6 @@ import "./styles.scss";
 import "./download.png";
 
 const Base_Server_Path = "http://localhost:3000";
-console.log(Base_Server_Path);
 
 function createElement(tagName, children = [], classes = [], attributes = {}) {
   // create new element in more comfortable
@@ -30,7 +29,7 @@ async function getStats(event) {
       `${Base_Server_Path}/api/statistic/${sequence}`
     );
     return stats;
-  } catch (err) {}
+  } catch (err) {} // complete error handling
 }
 
 async function handlerStat(event) {

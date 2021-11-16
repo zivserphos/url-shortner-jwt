@@ -4,6 +4,7 @@ const cors = require("cors");
 const { urlencoded } = require("body-parser");
 const shortUrlRouter = require("./routes/shortUrlRoute");
 const loginRouter = require("./routes/login");
+const signUpRouter = require("./routes/signUp");
 const statsRoute = require("./routes/statsRoute");
 const errorHandler = require("./handlers/errorHandler");
 const reDirectRouter = require("./routes/reDircetRouter");
@@ -27,6 +28,8 @@ app.get("/app/login", (req, res) => {
 app.get("/app/signUp", (req, res) => {
   res.sendFile(path.resolve("./server/dist/signUp.html"));
 });
+
+app.use("/signUp", signUpRouter);
 
 app.use("/", reDirectRouter);
 //app.use(express.static(path.resolve(`./dist`)));

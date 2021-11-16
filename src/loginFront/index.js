@@ -12,7 +12,7 @@ async function createToken(event) {
       password,
       userName,
     });
-    alert("login was succesfull");
+    window.location.href = "/app";
   } catch (err) {
     console.log(err);
     alert("cannot login");
