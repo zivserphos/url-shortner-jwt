@@ -1,12 +1,12 @@
 const express = require("express");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 const User = require("../modal/userSchema");
-const env = require("dotenv").config();
+
 const secret = process.env.SECRET;
 const loginRouter = express.Router();
-const cookieParser = require("cookie-parser");
-const jwt = require("jsonwebtoken");
 
-loginRouter.post("/", async (req, res, next) => {
+loginRouter.post("/", async (req, res) => {
   const userData = {
     userName: req.body.userName,
     password: req.body.password,
@@ -26,8 +26,6 @@ function generateAccessToken(user) {
   return jwt.sign({}, secret, { expiresIn: "600s" });
 }
 
-loginRouter.get("/", (req, res) => {
-  return res.send("fsafs");
-});
+loginRouter.get("/", (req, res) => res.send("fsafs"));
 
 module.exports = loginRouter;
