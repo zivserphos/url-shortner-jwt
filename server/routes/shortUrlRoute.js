@@ -47,7 +47,6 @@ function createObj(originUrl) {
 
 shortUrlRouter.post("/", async (req, res, next) => {
   try {
-    res.cookie("token", "zad");
     const token = req.cookies.token;
     if (!token) {
       throw { status: 401, message: "you have to login in first" };
