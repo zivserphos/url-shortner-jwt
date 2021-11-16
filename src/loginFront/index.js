@@ -18,7 +18,7 @@ async function createToken(event) {
     window.location.href = "/app";
     return false;
   } catch (err) {
-    alert("cannot login");
+    return alert("cannot login");
   }
 }
 
