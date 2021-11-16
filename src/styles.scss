@@ -276,9 +276,15 @@ h4 {
   font-size: 1.8rem;
 }
 
+.sign-buttons {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 .user {
   color:red;
-  float: right;
+  
   left: 0;
   // cursor: pointer;
 }
