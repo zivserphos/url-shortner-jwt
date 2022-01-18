@@ -15,7 +15,7 @@ const config = {
     signUp: "./src/signUpFront/index.js",
   },
   output: {
-    path: path.resolve(__dirname, "./server/dist"),
+    path: path.resolve(__dirname, "./dist"),
   },
   devServer: {
     open: true,
