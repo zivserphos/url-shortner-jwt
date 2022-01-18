@@ -17,7 +17,8 @@
         "no-throw-literal":"off",
         "linebreak-style": ["error" , "windows"],
         "no-console": "off",
-        "no-restricted-syntax":"off"
+        "no-restricted-syntax":"off",
+        "no-restricted-imports":"off"
         
     }
 }

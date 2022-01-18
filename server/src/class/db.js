@@ -1,15 +1,17 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-useless-catch */
+/* eslint-disable no-await-in-loop */
 const fs = require("fs");
 const fsAsync = require("fs/promises");
-const path = require("path");
 const util = require("util");
+
 const readFile = (filename) => util.promisify(fs.readFile)(filename, "utf-8");
 const moment = require("moment");
 
 class DataBase {
-  static #createShortCut() {
-    const created = true;
+  static createShortCut() {
     let shortUrl = "";
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 7; i += 1) {
       if (Math.random() < 0.5) {
         shortUrl += String.fromCharCode(65 + Math.floor(Math.random() * 26));
       } else {
@@ -20,7 +22,7 @@ class DataBase {
     return shortUrl;
   }
 
-  static async #readDataBase() {
+  static async readDataBase() {
     try {
       const fileData = await readFile("./server/db.json");
       return fileData;
@@ -29,10 +31,10 @@ class DataBase {
     }
   }
 
-  static async #createUrlObj(_originUrl) {
-    let newShortCut = await this.#createShortCut();
-    while (await this.#checkIfUrlExist(newShortCut)) {
-      newShortCut = await this.#createShortCut();
+  static async createUrlObj(_originUrl) {
+    let newShortCut = await this.createShortCut();
+    while (await this.checkIfUrlExist(newShortCut)) {
+      newShortCut = await this.createShortCut();
     }
     const urlObj = {
       originUrl: _originUrl,
@@ -45,18 +47,18 @@ class DataBase {
 
   static async addObjToDb(originUrl) {
     try {
-      if (await this.#isShortenExist(originUrl)) {
-        return await this.#getShortUrl(originUrl);
+      if (await this.isShortenExist(originUrl)) {
+        return await this.getShortUrl(originUrl);
       }
-      return await this.#writeUrl(await this.#createUrlObj(originUrl));
+      return await this.writeUrl(await this.createUrlObj(originUrl));
     } catch (err) {
       throw err;
     }
   }
 
-  static async #writeUrl(newObj) {
+  static async writeUrl(newObj) {
     try {
-      const dataBase = JSON.parse(await this.#readDataBase());
+      const dataBase = JSON.parse(await this.readDataBase());
       const objectsArr = dataBase.objects;
       objectsArr.push(newObj);
       dataBase.objects = objectsArr;
@@ -67,11 +69,11 @@ class DataBase {
     }
   }
 
-  static async #checkIfUrlExist(randomSequence) {
+  static async checkIfUrlExist(randomSequence) {
     try {
-      let dataBase = await this.#readDataBase();
+      let dataBase = await this.readDataBase();
       dataBase = JSON.parse(dataBase);
-      for (let i = 0; i < dataBase.objects.length; i++) {
+      for (let i = 0; i < dataBase.objects.length; i += 1) {
         if (dataBase.objects[i].shortUrl === randomSequence) {
           return true;
         }
@@ -81,11 +83,12 @@ class DataBase {
       throw "cannot read DataBase";
     }
   }
-  static async #isShortenExist(_originUrl) {
+
+  static async isShortenExist(_originUrl) {
     try {
-      let dataBase = await this.#readDataBase();
+      let dataBase = await this.readDataBase();
       dataBase = JSON.parse(dataBase);
-      for (let i = 0; i < dataBase.objects.length; i++) {
+      for (let i = 0; i < dataBase.objects.length; i += 1) {
         if (dataBase.objects[i].originUrl === _originUrl) {
           return true;
         }
@@ -95,10 +98,11 @@ class DataBase {
       throw "cannot read DataBase";
     }
   }
-  static async #getShortUrl(_originUrl) {
-    let dataBase = await this.#readDataBase();
+
+  static async getShortUrl(_originUrl) {
+    let dataBase = await this.readDataBase();
     dataBase = JSON.parse(dataBase);
-    for (let i = 0; i < dataBase.objects.length; i++) {
+    for (let i = 0; i < dataBase.objects.length; i += 1) {
       if (dataBase.objects[i].originUrl === _originUrl) {
         return dataBase.objects[i].shortUrl;
       }
@@ -107,11 +111,11 @@ class DataBase {
 
   static async getOriginUrl(_shortUrl) {
     try {
-      let dataBase = await this.#readDataBase();
+      let dataBase = await this.readDataBase();
       dataBase = JSON.parse(dataBase);
-      for (let i = 0; i < dataBase.objects.length; i++) {
+      for (let i = 0; i < dataBase.objects.length; i += 1) {
         if (dataBase.objects[i].shortUrl === _shortUrl) {
-          dataBase.objects[i].views++;
+          dataBase.objects[i].views += 1;
           await fsAsync.writeFile("./server/db.json", JSON.stringify(dataBase));
           return dataBase.objects[i].originUrl;
         }
@@ -123,9 +127,9 @@ class DataBase {
   }
 
   static async getObjectByShortUrl(_shortUrl) {
-    let dataBase = await this.#readDataBase();
+    let dataBase = await this.readDataBase();
     dataBase = JSON.parse(dataBase);
-    for (let i = 0; i < dataBase.objects.length; i++) {
+    for (let i = 0; i < dataBase.objects.length; i += 1) {
       if (dataBase.objects[i].shortUrl === _shortUrl) {
         return dataBase.objects[i];
       }
