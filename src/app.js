@@ -18,16 +18,16 @@ app.use(cors());
 app.use(urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
-app.use("/app", express.static(path.resolve(`./server/dist`)));
+app.use("/app", express.static(path.resolve(`./dist`)));
 
 app.use("/login", loginRouter);
 
 app.get("/app/login", (req, res) => {
-  res.sendFile(path.resolve("./server/dist/login.html"));
+  res.sendFile(path.resolve("./dist/login.html"));
 });
 
 app.get("/app/signUp", (req, res) => {
-  res.sendFile(path.resolve("./server/dist/signUp.html"));
+  res.sendFile(path.resolve("./dist/signUp.html"));
 });
 
 app.use("/signUp", signUpRouter);
